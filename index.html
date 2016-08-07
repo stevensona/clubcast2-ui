@@ -32,7 +32,7 @@
         <nav class="tabs is-medium">
           <div class="container" >
             <ul>
-              <li v-for="(index, podcast) in podcasts" @click="tab=index"><a><span>{{ podcast.title }}</span></a>
+              <li v-for="(index, podcast) in podcasts" @click="tab=index"><a><span>{{ podcast.artist }}</span></a>
             </ul>
           </div>
         </nav>
@@ -68,18 +68,18 @@
       <div class="container">
         <div class="title">
           <p class="title">{{podcasts[tab].title}}</p>
-          <p class="subtitle">{{podcasts[tab].description}}</p>
+          <p class="subtitle">{{podcasts[tab].summary}}</p>
         </div>
         <div class="columns is-multiline">
           <div class="column is-one-third" v-for="episode in podcasts[tab].episodes">
             <div class="card">
               <div class="card-image" @click="playing = episode">
-                <figure class="image is-square"><img v-bind:src="episode.thumbnail" alt=""></figure>
+                <figure class="image is-square"><img v-bind:src="episode.image" alt=""></figure>
               </div>
               <div class="card-content">
                 <div class="media">
                   <div class="media-left">
-                    <figure class="image is-32x32"><img src="https://placeimg.com/64/64/people" alt="Image"></figure>
+                    <figure class="image is-32x32"><img vbind:src="podcasts[tab].image" alt=""></figure>
                   </div>
                   <div class="media-content">
                     <p class="title is-5">{{episode.title}}</p>
@@ -87,7 +87,7 @@
                   </div>
                 </div>
                 <div class="content">
-                  {{{episode.summary}}}
+                  {{{episode.duration}}}
                   <small>{{episode.date}}</small>
                 </div>
               </div>
