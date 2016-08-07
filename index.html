@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>clubcast - the ultimate edm podcast compilation updated hourly</title>
+    <meta name="description" content="Compilation of latest and greatest EDM podcasts updated hourly">
+    <meta name="author" content="clubcast">
+    <link href="./bower_components/bulma/css/bulma.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Condensed|Slabo+27px" rel="stylesheet">
+
+    <link href="style.css" rel="stylesheet">
+
+
+  </head>
+  <body id="app">
+
+    <section class="hero is-bold is-light">
+
+      <div class="hero-body">
+        <div class="container">
+          <div class="title">
+            <p class="title">clubcast</p>
+            <p class="subtitle">the ultimate edm podcast compilation</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-foot">
+        <nav class="tabs is-medium">
+          <div class="container" >
+            <ul>
+              <li v-for="(index, podcast) in podcasts" @click="tab=index"><a><span>{{ podcast.title }}</span></a>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </section>
+
+    <section class="section">
+
+      <div class="container" v-show="playing">
+        <nav class="panel">
+          <div class="panel-heading">Now Playing</div>
+          <div class="panel-block">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-96x96"><img v-bind:src="playing.thumbnail"></p>
+              </figure>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong>{{playing.title}}</strong> <small>{{playing.artist}}</small>
+                    <audio src="./nothing.mp3" preload="none" />
+                  </p>
+                </div>
+              </div>
+            <div class="media-right">
+              <a class="button">Show Tracklist</a>
+            </div>
+            </article>
+          </div>
+        </nav>
+      </div>
+
+      <div class="container">
+        <div class="title">
+          <p class="title">{{podcasts[tab].title}}</p>
+          <p class="subtitle">{{podcasts[tab].description}}</p>
+        </div>
+        <div class="columns is-multiline">
+          <div class="column is-one-third" v-for="episode in podcasts[tab].episodes">
+            <div class="card">
+              <div class="card-image" @click="playing = episode">
+                <figure class="image is-square"><img v-bind:src="episode.thumbnail" alt=""></figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+                    <figure class="image is-32x32"><img src="https://placeimg.com/64/64/people" alt="Image"></figure>
+                  </div>
+                  <div class="media-content">
+                    <p class="title is-5">{{episode.title}}</p>
+                    <p class="subtitle is-6">{{episode.artist}}</p>
+                  </div>
+                </div>
+                <div class="content">
+                  {{{episode.summary}}}
+                  <small>{{episode.date}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            created by <a href="http://adamstevenson.me">Adam Stevenson</a>. Thanks for stopping by. Last updated 7-AUG-2016 00:00 EDT.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- TODO: google analytics -->
+    <script type="text/javascript" src="./bower_components/audiojs/audiojs/audio.js"></script>
+    <script type="text/javascript" src="./bower_components/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="./bower_components/jQuery/dist/jquery.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript">
+        audiojs.events.ready(function() {
+            var as = audiojs.createAll();
+        });
+    </script>
+  </body>
+</html>

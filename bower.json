@@ -1,0 +1,24 @@
+{
+  "name": "clubcast2-ui",
+  "authors": [
+    "Adam Stevenson <adamstevenson121@gmail.com>"
+  ],
+  "description": "frontend for clubcast2",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "https://clubcast.xyz",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "audiojs": "^1.0.1",
+    "vue": "^1.0.26",
+    "bulma": "^0.1.2",
+    "jQuery": "^3.1.0"
+  }
+}
