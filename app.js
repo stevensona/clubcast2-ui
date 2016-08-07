@@ -9,7 +9,7 @@ new Vue({
   ready: function () {
     var self = this;
     $.ajax({
-      url: 'https://raw.githubusercontent.com/stevensona/clubcast2-ui/master/data.json',
+      url: 'http://adamstevenson.me/clubcast2-ui/data.json',
       method: 'GET',
       success: function (data) {
           self.podcasts = data;
