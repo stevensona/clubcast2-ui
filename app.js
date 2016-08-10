@@ -1,7 +1,6 @@
 new Vue({
   el: '#app',
   data: {
-
     tab: 0,
     playing: 0,
     podcasts: [],
@@ -18,6 +17,12 @@ new Vue({
           alert(JSON.stringify(error));
       }
     });
+  },
+  filters: {
+    limit: function(arr, limit) {
+      if(!arr) return;
+      return arr.slice(0, Number(limit));
+    }
   }
 
 });

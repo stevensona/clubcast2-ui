@@ -15,7 +15,7 @@
 
 
   </head>
-  <body id="app">
+  <body id="app" v-cloak>
 
     <section class="hero is-bold is-light">
 
@@ -47,7 +47,7 @@
           <div class="panel-block">
             <article class="media">
               <figure class="media-left">
-                <p class="image is-96x96"><img v-bind:src="playing.thumbnail"></p>
+                <p class="image is-96x96"><img v-bind:src="playing.image"></p>
               </figure>
               <div class="media-content">
                 <div class="content">
@@ -71,15 +71,15 @@
           <p class="subtitle">{{podcasts[tab].summary}}</p>
         </div>
         <div class="columns is-multiline">
-          <div class="column is-one-third" v-for="episode in podcasts[tab].episodes">
+          <div class="column is-one-third" v-for="episode in podcasts[tab].episodes | limit 12">
             <div class="card">
-              <div class="card-image" @click="playing = episode">
+              <div class="card-image" @click="playing=episode">
                 <figure class="image is-square"><img v-bind:src="episode.image" alt=""></figure>
               </div>
               <div class="card-content">
                 <div class="media">
                   <div class="media-left">
-                    <figure class="image is-32x32"><img vbind:src="podcasts[tab].image" alt=""></figure>
+                    <figure class="image is-32x32"><img v-bind:src="podcasts[tab].image" alt=""></figure>
                   </div>
                   <div class="media-content">
                     <p class="title is-5">{{episode.title}}</p>
@@ -112,7 +112,7 @@
 
     <!-- TODO: google analytics -->
     <script type="text/javascript" src="./bower_components/audiojs/audiojs/audio.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <script type="text/javascript" src="./bower_components/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript">
