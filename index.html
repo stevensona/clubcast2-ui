@@ -53,7 +53,7 @@
                 <div class="content">
                   <p>
                     <strong>{{playing.title}}</strong> <small>{{playing.artist}}</small>
-                    <audio src="./nothing.mp3" preload="none" />
+                    <audio src="" preload="none" />
                   </p>
                 </div>
               </div>
@@ -73,7 +73,7 @@
         <div class="columns is-multiline">
           <div class="column is-one-third" v-for="episode in podcasts[tab].episodes | limit 12">
             <div class="card">
-              <div class="card-image" @click="playing=episode">
+              <div class="card-image" @click="play(episode)">
                 <figure class="image is-square"><img v-bind:src="episode.image" alt=""></figure>
               </div>
               <div class="card-content">
@@ -115,10 +115,6 @@
     <script type="text/javascript" src="./bower_components/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript">
-        audiojs.events.ready(function() {
-            var as = audiojs.createAll();
-        });
-    </script>
+
   </body>
 </html>

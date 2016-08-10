@@ -4,6 +4,7 @@ new Vue({
     tab: 0,
     playing: 0,
     podcasts: [],
+    audio: 0,
   },
   ready: function () {
     var self = this;
@@ -17,11 +18,21 @@ new Vue({
           alert(JSON.stringify(error));
       }
     });
+    audiojs.events.ready(function() {
+        self.audio = audiojs.createAll();
+    });
   },
   filters: {
     limit: function(arr, limit) {
       if(!arr) return;
       return arr.slice(0, Number(limit));
+    }
+  },
+  methods: {
+    play: function(episode) {
+      this.playing = episode;
+      this.audio[0].load(episode.url);
+      this.audio[0].play(); 
     }
   }
 
