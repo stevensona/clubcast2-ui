@@ -51,11 +51,9 @@
               </figure>
               <div class="media-content">
                 <div class="content">
-                  <p>
-                    <strong>{{playing.title}}</strong> <small>{{playing.artist}}</small>
-                    <audio src="" preload="none" />
-                    {{{playing.summary}}}
-                  </p>
+                  <p><strong>{{playing.title}}</strong> <small>{{playing.artist}}</small></p>
+                  <p><audio src="" preload="none" /></p>
+                  <p>{{{playing.summary}}}</p>
                 </div>
               </div>
             <div class="media-right">
@@ -73,7 +71,7 @@
           <p class="subtitle">{{podcasts[tab].summary}}</p>
         </div>
         <div class="columns is-multiline">
-          <div class="column is-one-third" v-for="episode in podcasts[tab].episodes | limit 12">
+          <div class="column is-one-third" v-for="episode in podcasts[tab].episodes | orderBy sortDate -1 | limit 12">
             <div class="card">
               <div class="card-image" @click="play(episode)">
                 <figure class="image is-square"><img v-bind:src="episode.image" alt=""></figure>

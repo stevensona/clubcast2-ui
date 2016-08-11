@@ -33,7 +33,11 @@ new Vue({
       this.playing = episode;
       this.audio[0].load(episode.url);
       this.audio[0].play(); 
+    },
+    sortDate: function(a, b) {
+      return (new Date(a.date) > new Date(b.date)) ? 1: -1;
     }
+
   }
 
 });
