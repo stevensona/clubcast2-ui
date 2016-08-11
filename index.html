@@ -15,7 +15,7 @@
 
 
   </head>
-  <body id="app">
+  <body id="app" v-cloak>
 
     <section class="hero is-bold is-light">
 
@@ -29,7 +29,7 @@
       </div>
 
       <div class="hero-foot">
-        <nav class="tabs is-medium">
+        <nav class="tabs is-small is-fullwidth">
           <div class="container" >
             <ul>
               <li v-for="(index, podcast) in podcasts" @click="tab=index"><a><span>{{ podcast.artist }}</span></a>
@@ -47,18 +47,18 @@
           <div class="panel-block">
             <article class="media">
               <figure class="media-left">
-                <p class="image is-96x96"><img v-bind:src="playing.thumbnail"></p>
+                <p class="image is-96x96"><img v-bind:src="playing.image"></p>
               </figure>
               <div class="media-content">
                 <div class="content">
-                  <p>
-                    <strong>{{playing.title}}</strong> <small>{{playing.artist}}</small>
-                    <audio src="./nothing.mp3" preload="none" />
-                  </p>
+                  <p><strong>{{playing.title}}</strong> <small>{{playing.artist}}</small></p>
+                  <p><audio src="" preload="none" /></p>
+                  <p>{{{playing.summary}}}</p>
                 </div>
               </div>
             <div class="media-right">
               <a class="button">Show Tracklist</a>
+              <a class="button">Download</a>
             </div>
             </article>
           </div>
@@ -71,15 +71,15 @@
           <p class="subtitle">{{podcasts[tab].summary}}</p>
         </div>
         <div class="columns is-multiline">
-          <div class="column is-one-third" v-for="episode in podcasts[tab].episodes">
+          <div class="column is-one-third" v-for="episode in podcasts[tab].episodes | orderBy sortDate -1 | limit 12">
             <div class="card">
-              <div class="card-image" @click="playing = episode">
+              <div class="card-image" @click="play(episode)">
                 <figure class="image is-square"><img v-bind:src="episode.image" alt=""></figure>
               </div>
               <div class="card-content">
                 <div class="media">
                   <div class="media-left">
-                    <figure class="image is-32x32"><img vbind:src="podcasts[tab].image" alt=""></figure>
+                    <figure class="image is-32x32"><img v-bind:src="podcasts[tab].image" alt=""></figure>
                   </div>
                   <div class="media-content">
                     <p class="title is-5">{{episode.title}}</p>
@@ -87,7 +87,7 @@
                   </div>
                 </div>
                 <div class="content">
-                  {{{episode.duration}}}
+                  {{episode.duration}}
                   <small>{{episode.date}}</small>
                 </div>
               </div>
@@ -113,12 +113,8 @@
     <!-- TODO: google analytics -->
     <script type="text/javascript" src="./bower_components/audiojs/audiojs/audio.js"></script>
     <script type="text/javascript" src="./bower_components/vue/dist/vue.js"></script>
-    <script type="text/javascript" src="./bower_components/jQuery/dist/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript">
-        audiojs.events.ready(function() {
-            var as = audiojs.createAll();
-        });
-    </script>
+
   </body>
 </html>

@@ -1,15 +1,15 @@
 new Vue({
   el: '#app',
   data: {
-
     tab: 0,
     playing: 0,
     podcasts: [],
+    audio: 0,
   },
   ready: function () {
     var self = this;
     $.ajax({
-      url: 'https://raw.githubusercontent.com/stevensona/clubcast2-ui/master/data.json',
+      url: 'http://adamstevenson.me/clubcast2-ui/data.json',
       method: 'GET',
       success: function (data) {
           self.podcasts = data;
@@ -18,6 +18,26 @@ new Vue({
           alert(JSON.stringify(error));
       }
     });
+    audiojs.events.ready(function() {
+        self.audio = audiojs.createAll();
+    });
+  },
+  filters: {
+    limit: function(arr, limit) {
+      if(!arr) return;
+      return arr.slice(0, Number(limit));
+    }
+  },
+  methods: {
+    play: function(episode) {
+      this.playing = episode;
+      this.audio[0].load(episode.url);
+      this.audio[0].play(); 
+    },
+    sortDate: function(a, b) {
+      return (new Date(a.date) > new Date(b.date)) ? 1: -1;
+    }
+
   }
 
 });
