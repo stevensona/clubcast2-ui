@@ -29,7 +29,7 @@
       </div>
 
       <div class="hero-foot">
-        <nav class="tabs is-medium">
+        <nav class="tabs is-small is-fullwidth">
           <div class="container" >
             <ul>
               <li v-for="(index, podcast) in podcasts" @click="tab=index"><a><span>{{ podcast.artist }}</span></a>
@@ -54,11 +54,13 @@
                   <p>
                     <strong>{{playing.title}}</strong> <small>{{playing.artist}}</small>
                     <audio src="" preload="none" />
+                    {{{playing.summary}}}
                   </p>
                 </div>
               </div>
             <div class="media-right">
               <a class="button">Show Tracklist</a>
+              <a class="button">Download</a>
             </div>
             </article>
           </div>
@@ -87,7 +89,7 @@
                   </div>
                 </div>
                 <div class="content">
-                  {{{episode.duration}}}
+                  {{episode.duration}}
                   <small>{{episode.date}}</small>
                 </div>
               </div>
