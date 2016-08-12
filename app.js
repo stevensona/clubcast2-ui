@@ -25,7 +25,37 @@ var Episode = Vue.extend({
     </div>`
 });
 
+var NowPlaying = Vue.extend({
+  props: ['playing'],
+  template:`
+    <div class="container" v-show="playing">
+      <nav class="panel">
+        <div class="panel-heading">Now Playing</div>
+        <div class="panel-block">
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-96x96"><img v-bind:src="playing.image"></p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p><strong>{{playing.title}}</strong> <small>{{playing.artist}}</small></p>
+                <p><audio src="" preload="none" /></p>
+                <p>{{{playing.summary}}}</p>
+              </div>
+            </div>
+          <div class="media-right">
+            <a class="button">Show Tracklist</a>
+            <a class="button">Download</a>
+          </div>
+          </article>
+        </div>
+      </nav>
+    </div>
+  `
+});
+
 Vue.component('episode', Episode);
+Vue.component('now-playing', NowPlaying);
 
 new Vue({
   el: '#app',
