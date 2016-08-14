@@ -68,7 +68,7 @@ new Vue({
   ready: function () {
     var self = this;
     $.ajax({
-      url: '/data.json',
+      url: 'http://adamstevenson.me/clubcast2-ui/data.json',
       method: 'GET',
       success: function (data) {
           self.podcasts = data;
