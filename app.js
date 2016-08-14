@@ -1,7 +1,7 @@
 var Episode = Vue.extend({
   props: ['episode', 'play', 'thumbnail'],
   template: `
-    <div class="column is-one-third">
+    <div class="column is-one-third animated" transition="zoom">
       <div class="card">
         <div class="card-image" @click="play(episode)">
           <figure class="image is-square"><img v-bind:src="episode.image" alt=""></figure>
@@ -99,4 +99,10 @@ new Vue({
 
   }
 
+});
+
+
+Vue.transition('zoom', {
+  enterClass: 'zoomIn',
+  leaveClass: 'fadeOut'
 });

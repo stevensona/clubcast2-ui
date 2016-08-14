@@ -19,6 +19,7 @@
     "audiojs": "^1.0.1",
     "vue": "^1.0.26",
     "bulma": "^0.1.2",
-    "jQuery": "^3.1.0"
+    "jQuery": "^3.1.0",
+    "animate.css": "animate-css#^3.5.2"
   }
 }
