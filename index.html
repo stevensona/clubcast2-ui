@@ -14,7 +14,7 @@
   </head>
   <body id="app" v-cloak>
 
-    <section class="hero is-bold is-light">
+    <section class="hero is-bold is-dark">
 
       <div class="hero-body">
         <div class="container">
@@ -63,8 +63,8 @@
               <p class="title">{{podcasts[tab].title}}</p>
               <p class="subtitle">{{podcasts[tab].summary}}</p>
             </div>
-            <div class="columns is-multiline">
 
+            <div class="columns is-multiline">
               <episode v-for="episode in podcasts[tab].episodes | orderBy sortDate -1 | limit 12"
                 :episode="episode"
                 :play="play"
@@ -72,6 +72,7 @@
               </episode>
             </div>
           </div>
+          
         </div>
       </div>
     </section>
