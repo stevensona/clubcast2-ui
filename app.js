@@ -30,7 +30,7 @@ var NowPlaying = Vue.extend({
   template:`
     <div class="container" v-show="playing">
       <nav class="panel">
-        <div class="panel-heading">Now Playing</div>
+        <div class="panel-heading">Now Playing</div>      
         <div class="panel-block">
           <article class="media">
             <figure class="media-left">
@@ -40,11 +40,11 @@ var NowPlaying = Vue.extend({
               <div class="content">
                 <p><strong>{{playing.title}}</strong> <small>{{playing.artist}}</small></p>
                 <p><audio src="" preload="none" /></p>
-                <p>{{{playing.summary}}}</p>
+                <!--<p>{{{playing.summary}}}</p>-->
               </div>
             </div>
           <div class="media-right">
-            <a class="button">Show Tracklist</a>
+            <a class="button">Show Tracklist</a><br>
             <a class="button">Download</a>
           </div>
           </article>
@@ -68,7 +68,7 @@ new Vue({
   ready: function () {
     var self = this;
     $.ajax({
-      url: 'http://adamstevenson.me/clubcast2-ui/data.json',
+      url: '/data.json',
       method: 'GET',
       success: function (data) {
           self.podcasts = data;

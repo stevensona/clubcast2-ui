@@ -10,10 +10,7 @@
     <link href="./bower_components/bulma/css/bulma.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Condensed|Slabo+27px" rel="stylesheet">
-
     <link href="style.css" rel="stylesheet">
-
-
   </head>
   <body id="app" v-cloak>
 
@@ -27,7 +24,7 @@
           </div>
         </div>
       </div>
-      <div class="hero-foot">
+      <!--<div class="hero-foot">
         <nav class="tabs is-small is-fullwidth">
           <div class="container" >
             <ul>
@@ -35,26 +32,47 @@
             </ul>
           </div>
         </nav>
-      </div>
+      </div>-->
     </section>
 
     <section class="section">
 
-      <now-playing :playing="playing"></now-playing>
-
       <div class="container">
-        <div class="title">
-          <p class="title">{{podcasts[tab].title}}</p>
-          <p class="subtitle">{{podcasts[tab].summary}}</p>
-        </div>
-        <div class="columns is-multiline">
-          <episode v-for="episode in podcasts[tab].episodes | orderBy sortDate -1 | limit 12"
-            :episode="episode"
-            :play="play"
-            :thumbnail="podcasts[tab].image">
-          </episode>
-        </div>
 
+        <div class="columns">
+
+          <div class="column is-narrow">
+            <aside class="menu">
+              <p class="menu-label">Collections</p>
+              <ul class="menu-list">
+                <li><a><span>Latest</span></a>
+                <li><a><span>Random</span></a>
+              </ul>
+              <p class="menu-label">Artists</p>
+              <ul class="menu-list">
+                <li v-for="(index, podcast) in podcasts"><a @click="tab=index"><span>{{ podcast.artist }}</span></a>
+              </ul>             
+            </aside>
+          </div>
+
+          <div class="column">    
+
+            <now-playing :playing="playing"></now-playing>
+
+            <div class="title">
+              <p class="title">{{podcasts[tab].title}}</p>
+              <p class="subtitle">{{podcasts[tab].summary}}</p>
+            </div>
+            <div class="columns is-multiline">
+
+              <episode v-for="episode in podcasts[tab].episodes | orderBy sortDate -1 | limit 12"
+                :episode="episode"
+                :play="play"
+                :thumbnail="podcasts[tab].image">
+              </episode>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -73,7 +91,7 @@
     <!-- TODO: google analytics -->
     <script type="text/javascript" src="./bower_components/audiojs/audiojs/audio.js"></script>
     <script type="text/javascript" src="./bower_components/vue/dist/vue.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./bower_components/jQuery/dist/jquery.js"></script>
     <script type="text/javascript" src="app.js"></script>
 
   </body>
