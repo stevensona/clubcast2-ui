@@ -63,6 +63,7 @@ new Vue({
     tab: 0,
     playing: 0,
     podcasts: [],
+    episodes: [],
     audio: 0,
   },
   ready: function () {
@@ -71,7 +72,8 @@ new Vue({
       url: 'http://adamstevenson.me/clubcast2-ui/data.json',
       method: 'GET',
       success: function (data) {
-          self.podcasts = data;
+          self.podcasts = data['podcasts'];
+          self.episodes = data['episodes'];
       },
       error: function (error) {
           alert(JSON.stringify(error));

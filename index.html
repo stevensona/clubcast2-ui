@@ -49,9 +49,15 @@
                 <li><a><span>Latest</span></a>
                 <li><a><span>Random</span></a>
               </ul>
+              <p class="menu-label">Genres</p>
+              <ul class="menu-list">
+                <li><a><span>Trance</span></a>
+                <li><a><span>House</span></a>
+                <li><a><span>Electronica</span></a>
+              </ul>
               <p class="menu-label">Artists</p>
               <ul class="menu-list">
-                <li v-for="(index, podcast) in podcasts"><a @click="tab=index"><span>{{ podcast.artist }}</span></a>
+                <li v-for="podcast in podcasts"><a @click="tab=podcast.id"><span>{{ podcast.artist }}</span></a>
               </ul>             
             </aside>
           </div>
@@ -66,7 +72,7 @@
             </div>
 
             <div class="columns is-multiline">
-              <episode v-for="episode in podcasts[tab].episodes | orderBy sortDate -1 | limit 12"
+              <episode v-for="episode in episodes | filterBy tab in 'id' | orderBy sortDate -1 | limit 12"
                 :episode="episode"
                 :play="play"
                 :thumbnail="podcasts[tab].image">
