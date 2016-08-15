@@ -46,7 +46,7 @@
             <aside class="menu">
               <p class="menu-label">Collections</p>
               <ul class="menu-list">
-                <li><a><span>Latest</span></a>
+                <li><a @click="tab=-1"><span>Latest</span></a>
                 <li><a><span>Random</span></a>
               </ul>
               <p class="menu-label">Genres</p>
@@ -72,10 +72,10 @@
             </div>
 
             <div class="columns is-multiline">
-              <episode v-for="episode in episodes | filterBy tab in 'id' | orderBy sortDate -1 | limit 12"
+              <episode v-for="episode in episodes | filterBy equals(tab) | orderBy sortDate -1 | limit 12"
                 :episode="episode"
                 :play="play"
-                :thumbnail="podcasts[tab].image">
+                :thumbnail="podcasts[episode.id].image">
               </episode>
             </div>
           </div>

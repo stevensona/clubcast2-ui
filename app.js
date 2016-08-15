@@ -97,8 +97,13 @@ new Vue({
     },
     sortDate: function(a, b) {
       return (new Date(a.date) > new Date(b.date)) ? 1: -1;
+    },
+    equals: function(x) {
+      if(x === -1) return true;
+      return function(val) { 
+        return val.id === x;
+      };
     }
-
   }
 
 });
