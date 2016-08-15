@@ -3,8 +3,8 @@ var Episode = Vue.extend({
   template: `
     <div class="column is-one-third animated" transition="zoom">
       <div class="card">
-        <div class="card-image" @click="play(episode)">
-          <figure class="image is-square"><img v-bind:src="episode.image" alt=""></figure>
+        <div class="card-image">
+          <figure class="image is-square"><a @click="play(episode)"><img v-bind:src="episode.image" alt=""></a></figure>
         </div>
         <div class="card-content">
           <div class="media">
