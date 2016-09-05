@@ -49,7 +49,7 @@
               </ul> 
               <p class="menu-label">Artists</p>
               <ul class="menu-list">
-                <li v-for="podcast in podcasts"><a v-link="{ path: '/artist/' + podcast.artist }"><span>{{ podcast.artist }}</span></a>
+                <li v-for="podcast in podcasts"><a v-link="{ path: '/artist/' + podcast.artist }"><span>{{ podcast.art }}</span></a>
               </ul>             
             </aside>
           </div>
@@ -73,13 +73,13 @@
           <now-playing :playing="playing"></now-playing>
           <div class="title">
             <p class="title">{{podcasts[tab].title}}</p>
-            <p class="subtitle">{{podcasts[tab].summary}}</p>
+            <p class="subtitle">{{podcasts[tab].sum}}</p>
           </div>
           <div class="columns is-multiline">
             <episode v-for="episode in episodes | filterBy $route.params.artist in 'author' | orderBy sortDate -1 | limit 12"
               :episode="episode"
               :play="play"
-              :thumbnail="podcasts[episode.id].image">
+              :thumbnail="podcasts[episode.id].img">
             </episode>
           </div>
         </div>
@@ -89,7 +89,7 @@
         <div class="column is-one-third animated" transition="zoom">
           <div class="card">
             <div class="card-image">
-              <figure class="image is-square"><a @click="play(episode)"><img v-bind:src="episode.image" alt=""></a></figure>
+              <figure class="image is-square"><a @click="play(episode)"><img v-bind:src="episode.img" alt=""></a></figure>
             </div>
             <div class="card-content">
               <div class="media">
@@ -98,12 +98,12 @@
                 </div>
                 <div class="media-content">
                   <p class="title is-5">{{episode.title}}</p>
-                  <p class="subtitle is-6">{{episode.artist}}</p>
+                  <p class="subtitle is-6">{{episode.art}}</p>
                 </div>
               </div>
               <div class="content">
-                {{episode.duration}}
-                <small>{{episode.date}}</small>
+                {{episode.dur}}
+                <small>{{episode.dat}}</small>
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@
             <div class="panel-block">
               <article class="media">
                 <figure class="media-left">
-                  <p class="image is-96x96"><img v-bind:src="playing.image"></p>
+                  <p class="image is-96x96"><img v-bind:src="playing.img"></p>
                 </figure>
                 <div class="media-content">
                   <div class="content">

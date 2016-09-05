@@ -17,7 +17,7 @@ Vue.component('playlist', {
       return arr.slice(0, Number(limit));
     },
     sortDate: function(a, b) {
-      return (new Date(a.date) > new Date(b.date)) ? 1: -1;
+      return (new Date(a.dat) > new Date(b.dat)) ? 1: -1;
     }
   },
   methods: {
