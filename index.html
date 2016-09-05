@@ -49,7 +49,7 @@
               </ul> 
               <p class="menu-label">Artists</p>
               <ul class="menu-list">
-                <li v-for="podcast in podcasts"><a v-link="{ path: '/artist/' + podcast.artist }"><span>{{ podcast.art }}</span></a>
+                <li v-for="podcast in podcasts"><a v-link="{ path: '/artist/' + podcast.art }"><span>{{ podcast.art }}</span></a>
               </ul>             
             </aside>
           </div>
@@ -76,7 +76,7 @@
             <p class="subtitle">{{podcasts[tab].sum}}</p>
           </div>
           <div class="columns is-multiline">
-            <episode v-for="episode in episodes | filterBy $route.params.artist in 'author' | orderBy sortDate -1 | limit 12"
+            <episode v-for="episode in episodes | filterBy $route.params.artist in 'art' | orderBy sortDate -1 | limit 12"
               :episode="episode"
               :play="play"
               :thumbnail="podcasts[episode.id].img">
@@ -120,7 +120,7 @@
                 </figure>
                 <div class="media-content">
                   <div class="content">
-                    <p><strong>{{playing.title}}</strong> <small>{{playing.artist}}</small></p>
+                    <p><strong>{{playing.title}}</strong> <small>{{playing.art}}</small></p>
                     <p><audio src="" preload="none" /></p>
                     <!--<p>{{{playing.summary}}}</p>-->
                   </div>
