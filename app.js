@@ -1,70 +1,45 @@
-var Episode = Vue.extend({
+Vue.component('episode', {
   props: ['episode', 'play', 'thumbnail'],
-  template: `
-    <div class="column is-one-third animated" transition="zoom">
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-square"><a @click="play(episode)"><img v-bind:src="episode.image" alt=""></a></figure>
-        </div>
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-              <figure class="image is-32x32"><img v-bind:src="thumbnail" alt=""></figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-5">{{episode.title}}</p>
-              <p class="subtitle is-6">{{episode.artist}}</p>
-            </div>
-          </div>
-          <div class="content">
-            {{episode.duration}}
-            <small>{{episode.date}}</small>
-          </div>
-        </div>
-      </div>
-    </div>`
+  template: '#episode'
 });
 
-var NowPlaying = Vue.extend({
+Vue.component('now-playing', {
   props: ['playing'],
-  template:`
-    <div class="container" v-show="playing">
-      <nav class="panel">
-        <div class="panel-heading">Now Playing</div>      
-        <div class="panel-block">
-          <article class="media">
-            <figure class="media-left">
-              <p class="image is-96x96"><img v-bind:src="playing.image"></p>
-            </figure>
-            <div class="media-content">
-              <div class="content">
-                <p><strong>{{playing.title}}</strong> <small>{{playing.artist}}</small></p>
-                <p><audio src="" preload="none" /></p>
-                <!--<p>{{{playing.summary}}}</p>-->
-              </div>
-            </div>
-          <div class="media-right">
-            <a class="button">Show Tracklist</a><br>
-            <a class="button">Download</a>
-          </div>
-          </article>
-        </div>
-      </nav>
-    </div>
-  `
+  template: '#now-playing'
 });
 
-Vue.component('episode', Episode);
-Vue.component('now-playing', NowPlaying);
+Vue.component('playlist', {
+  props: ['episodes', 'podcasts', 'audio', 'playing'],
+  template: '#playlist',
+  filters: {
+    limit: function(arr, limit) {
+      if(!arr) return;
+      return arr.slice(0, Number(limit));
+    },
+    sortDate: function(a, b) {
+      return (new Date(a.date) > new Date(b.date)) ? 1: -1;
+    }
+  },
+  methods: {
+    play: function(episode) {
+      this.playing = episode;
+      this.audio[0].load(episode.url);
+      this.audio[0].play(); 
+    }
+  }
 
-new Vue({
-  el: '#app',
-  data: {
-    tab: 0,
-    playing: 0,
-    podcasts: [],
-    episodes: [],
-    audio: 0,
+});
+
+var App = Vue.extend({
+  data: function() {
+    return {
+      tab: this.tab,
+      playing: this.playing,
+      podcasts: this.podcasts,
+      episodes: this.episodes,
+      genres: ['Electronica', 'House', 'Trance'],
+      audio: this.audio,
+    }
   },
   ready: function () {
     var self = this;
@@ -82,32 +57,20 @@ new Vue({
     audiojs.events.ready(function() {
         self.audio = audiojs.createAll();
     });
-  },
-  filters: {
-    limit: function(arr, limit) {
-      if(!arr) return;
-      return arr.slice(0, Number(limit));
-    }
-  },
-  methods: {
-    play: function(episode) {
-      this.playing = episode;
-      this.audio[0].load(episode.url);
-      this.audio[0].play(); 
-    },
-    sortDate: function(a, b) {
-      return (new Date(a.date) > new Date(b.date)) ? 1: -1;
-    },
-    equals: function(x) {
-      if(x === -1) return true;
-      return function(val) { 
-        return val.id === x;
-      };
-    }
   }
-
 });
 
+var router = new VueRouter();
+
+router.map({
+  '/artist/:artist': { component: Vue.component('playlist')},
+  '/genre/:genre': { component: Vue.component('playlist')},
+  '/latest': { component: Vue.component('playlist')},
+  '/random': { component: Vue.component('playlist')},
+  '/': { component: Vue.component('playlist')}
+})
+
+router.start(App, '#app');
 
 Vue.transition('zoom', {
   enterClass: 'zoomIn',
