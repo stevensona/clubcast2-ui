@@ -66,7 +66,7 @@ var App = Vue.extend({
   ready: function () {
     var self = this;
     $.ajax({
-      url: 'http://adamstevenson.me/clubcast2-ui/data.json',
+      url: 'http://clubcast.xyz/data.json',
       method: 'GET',
       success: function (data) {
           self.podcasts = data['podcasts'];
