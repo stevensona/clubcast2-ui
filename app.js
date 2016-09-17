@@ -15,9 +15,6 @@ Vue.component('latest', {
     limit: function(arr, limit) {
       if(!arr) return;
       return arr.slice(0, Number(limit));
-    },
-    sortDate: function(a, b) {
-      return (new Date(a.dat) > new Date(b.dat)) ? 1: -1;
     }
   },
   methods: {
@@ -25,6 +22,10 @@ Vue.component('latest', {
       this.playing = episode;
       this.audio[0].load(episode.url);
       this.audio[0].play(); 
+    },
+    sortDate: function(a, b) {
+      console.log("sorting");
+      return (new Date(b.dat) - new Date(a.dat));
     }
   }
 });
@@ -36,9 +37,6 @@ Vue.component('playlist', {
     limit: function(arr, limit) {
       if(!arr) return;
       return arr.slice(0, Number(limit));
-    },
-    sortDate: function(a, b) {
-      return (new Date(a.dat) > new Date(b.dat)) ? 1: -1;
     }
   },
   methods: {
@@ -47,6 +45,10 @@ Vue.component('playlist', {
       this.audio[0].load(episode.url);
       this.audio[0].play(); 
     },
+    sortDate: function(a, b) {
+      console.log("sorting");
+      return (new Date(b.dat) - new Date(a.dat));
+    }
   }
 });
 
