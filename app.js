@@ -1,11 +1,32 @@
 Vue.component('episode', {
-  props: ['episode', 'play', 'thumbnail'],
+  props: ['episode', 'play'],
   template: '#episode'
 });
 
 Vue.component('now-playing', {
   props: ['playing'],
   template: '#now-playing'
+});
+
+Vue.component('latest', {
+  props: ['episodes', 'podcasts', 'audio', 'playing'],
+  template: '#latest',
+  filters: {
+    limit: function(arr, limit) {
+      if(!arr) return;
+      return arr.slice(0, Number(limit));
+    },
+    sortDate: function(a, b) {
+      return (new Date(a.dat) > new Date(b.dat)) ? 1: -1;
+    }
+  },
+  methods: {
+    play: function(episode) {
+      this.playing = episode;
+      this.audio[0].load(episode.url);
+      this.audio[0].play(); 
+    }
+  }
 });
 
 Vue.component('playlist', {
@@ -25,9 +46,8 @@ Vue.component('playlist', {
       this.playing = episode;
       this.audio[0].load(episode.url);
       this.audio[0].play(); 
-    }
+    },
   }
-
 });
 
 var App = Vue.extend({
@@ -65,7 +85,7 @@ var router = new VueRouter();
 router.map({
   '/artist/:artist': { component: Vue.component('playlist')},
   '/genre/:genre': { component: Vue.component('playlist')},
-  '/latest': { component: Vue.component('playlist')},
+  '/latest': { component: Vue.component('latest')},
   '/random': { component: Vue.component('playlist')},
   '/': { component: Vue.component('playlist')}
 })

@@ -38,7 +38,7 @@
         <div class="columns">
           <div class="column is-narrow">
             <aside class="menu">
-              <p class="menu-label">Collections</p>
+              <!--<p class="menu-label">Collections</p>
               <ul class="menu-list">
                 <li><a v-link="{ path: '/latest' }"><span>Latest</span></a>
                 <li><a v-link="{ path: '/random' }"><span>Random</span></a>
@@ -46,7 +46,7 @@
               <p class="menu-label">Genres</p>
               <ul class="menu-list">
                 <li v-for="genre in genres"><a v-link="{ path: '/genre/' + genre }"><span>{{ genre }}</span></a>
-              </ul> 
+              </ul>--> 
               <p class="menu-label">Artists</p>
               <ul class="menu-list">
                 <li v-for="podcast in podcasts"><a v-link="{ path: '/artist/' + podcast.art }"><span>{{ podcast.art }}</span></a>
@@ -68,18 +68,36 @@
       </div>
     </footer>
 
-    <template id="playlist">
+ 
+    <template id="latest">
+        <now-playing :playing="playing"></now-playing>
         <div class="column">    
-          <now-playing :playing="playing"></now-playing>
+          
           <div class="title">
-            <p class="title">{{podcasts[tab].title}}</p>
-            <p class="subtitle">{{podcasts[tab].sum}}</p>
+            <!--<p class="title">{{podcasts[tab].title}}</p>
+            <p class="subtitle">{{podcasts[tab].sum}}</p>-->
           </div>
           <div class="columns is-multiline">
             <episode v-for="episode in episodes | filterBy $route.params.artist in 'art' | orderBy sortDate -1 | limit 12"
               :episode="episode"
-              :play="play"
-              :thumbnail="podcasts[episode.id].img">
+              :play="play">
+            </episode>
+          </div>
+        </div>
+    </template>
+
+    <template id="playlist">
+        
+        <div class="column">    
+        <now-playing :playing="playing"></now-playing>  
+          <div class="title">
+            <p class="title">{{podcasts[p_id].title}}</p>
+            <p class="subtitle">{{podcasts[p_id].sum}}</p>
+          </div>
+          <div class="columns is-multiline">
+            <episode v-for="episode in episodes | filterBy $route.params.artist in 'art' | orderBy sortDate -1 | limit 12"
+              :episode="episode"
+              :play="play">
             </episode>
           </div>
         </div>
@@ -93,9 +111,9 @@
             </div>
             <div class="card-content">
               <div class="media">
-                <div class="media-left">
+                <!--<div class="media-left">
                   <figure class="image is-32x32"><img v-bind:src="thumbnail" alt=""></figure>
-                </div>
+                </div>-->
                 <div class="media-content">
                   <p class="title is-5">{{episode.title}}</p>
                   <p class="subtitle is-6">{{episode.art}}</p>
@@ -126,8 +144,8 @@
                   </div>
                 </div>
               <div class="media-right">
-                <a class="button">Show Tracklist</a><br>
-                <a class="button">Download</a>
+                <!--<a class="button">Show Tracklist</a><br>
+                <a class="button">Download</a>-->
               </div>
               </article>
             </div>
