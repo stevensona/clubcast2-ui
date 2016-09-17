@@ -74,8 +74,8 @@
         <div class="column">    
           
           <div class="title">
-            <!--<p class="title">{{podcasts[tab].title}}</p>
-            <p class="subtitle">{{podcasts[tab].sum}}</p>-->
+            <p class="title">{{podcasts[$route.params.artist].title}}</p>
+            <p class="subtitle">{{podcasts[$route.params.artist].sum}}</p>
           </div>
           <div class="columns is-multiline">
             <episode v-for="episode in episodes | filterBy $route.params.artist in 'art' | orderBy sortDate -1 | limit 12"
@@ -91,8 +91,8 @@
         <div class="column">    
         <now-playing :playing="playing"></now-playing>  
           <div class="title">
-            <p class="title">{{podcasts[p_id].title}}</p>
-            <p class="subtitle">{{podcasts[p_id].sum}}</p>
+            <p class="title">{{podcasts[$route.params.artist].title}}</p>
+            <p class="subtitle">{{podcasts[$route.params.artist].sum}}</p>
           </div>
           <div class="columns is-multiline">
             <episode v-for="episode in episodes | filterBy $route.params.artist in 'art' | orderBy sortDate -1 | limit 12"
